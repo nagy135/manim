@@ -12,14 +12,13 @@ import numpy as np
 class OpeningManimExample(Scene):
     def construct(self):
         intro_words = Text("""
-            The original motivation for manim was to
+            TROLL The original motivation for manim was to
             better illustrate mathematical functions
             as transformations.
         """)
         intro_words.to_edge(UP)
 
-        self.play(Write(intro_words))
-        self.wait(2)
+        # self.play(Write(intro_words))
 
         # Linear transform
         grid = NumberPlane((-10, 10), (-5, 5))
@@ -37,7 +36,6 @@ class OpeningManimExample(Scene):
             ShowCreation(grid),
             FadeTransform(intro_words, linear_transform_words)
         )
-        self.wait()
         self.play(grid.animate.apply_matrix(matrix), run_time=3)
         self.wait()
 
@@ -62,10 +60,37 @@ class OpeningManimExample(Scene):
         )
         self.wait()
         self.play(
-            moving_c_grid.animate.apply_complex_function(lambda z: z**2),
-            run_time=6,
+            moving_c_grid.animate.apply_complex_function(lambda z: z**3),
+            run_time=3,
         )
-        self.wait(2)
+        self.play(
+            moving_c_grid.animate.apply_complex_function(lambda z: z+3),
+            run_time=3,
+        )
+        self.play(
+            moving_c_grid.animate.apply_complex_function(lambda z: z*3),
+            run_time=3,
+        )
+        self.play(
+            moving_c_grid.animate.apply_complex_function(lambda z: z-6),
+            run_time=3,
+        )
+        self.play(
+            FadeOut(moving_c_grid),
+            run_time=3,
+        )
+        test_words = Text("""
+            First Text
+        """)
+        test_words.to_edge(DOWN)
+        self.play(
+            FadeIn(test_words),
+            run_time=3,
+        )
+        self.play(
+            test_words.animate.AnimatingMethods
+        )
+        a = 1/0
 
 
 class AnimatingMethods(Scene):
@@ -128,7 +153,7 @@ class TextExample(Scene):
             """,
             font="Arial", font_size=24,
             # t2c is a dict that you can choose color for different text
-            t2c={"Text": BLUE, "TexText": BLUE, "LaTeX": ORANGE}
+            t2c={"Text": BLUE, "TexText": BLUE, "LaTeX": RED}
         )
         VGroup(text, difference).arrange(DOWN, buff=1)
         self.play(Write(text))
@@ -150,7 +175,7 @@ class TextExample(Scene):
             t2c={"slant": ORANGE, "weight": RED}
         )
         VGroup(fonts, slant).arrange(DOWN, buff=0.8)
-        self.play(FadeOut(text), FadeOut(difference, shift=DOWN))
+        self.play(FadeOut(text), FadeOut(difference, shift=LEFT))
         self.play(Write(fonts))
         self.wait()
         self.play(Write(slant))
