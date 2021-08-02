@@ -9,7 +9,8 @@ class SquareToCircle(Scene):
 
         square.flip(DL)
         square2.flip(LEFT)
-        square.rotate(-3 * TAU / 8)
+        square.rotate(-50 * TAU / 8)
+        square.rotate(300)
         square2.rotate(-1 * TAU / 8)
         circle.set_fill(PINK, opacity=0.5)
         circle2.set_fill(BLUE, opacity=0.9)
